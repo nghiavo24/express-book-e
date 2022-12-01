@@ -13,11 +13,21 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
     try {
-        const usersFind = await User.findById(req.params.id);
-        res.json(usersFind);
+        const userFind = await User.findById(req.params.id);
+        res.json(userFind);
     } catch (err) {
         next(err)
     }
 })
+
+router.post('/', async (req, res, next) => {
+    try {
+        const newUser = await User.create(req.body);
+        res.status(201).json(newUser);
+    } catch (err) {
+        next(err)
+    }
+})
+
 
 module.exports = router
